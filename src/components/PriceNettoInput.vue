@@ -10,8 +10,23 @@ watch(priceNetto, (newValue) => emit('update:modelValue', newValue));
 
 // allow only numbers and commas
 const validateNumberInput = () => {
-  if (!/^[0-9.,]*$/.test(priceNetto.value)) {
-    priceNetto.value = priceNetto.value.replace(/[^0-9.,]/g, '');
+  // changle commas to a dot
+  priceNetto.value = priceNetto.value.replace(',', '.');
+
+  // check if given number meets the validation regex
+  if (!/^\d+(\.\d{0,2})?$/.test(priceNetto.value)) {
+    priceNetto.value = priceNetto.value.replace(/[^0-9.]/g, '');
+    
+    // check if first input is a dot
+    if (priceNetto.value.startsWith('.')) {
+      priceNetto.value = '';
+    }
+
+    // allow for only one dot, if more are typed in delete them
+    const parts = priceNetto.value.split('.');
+    if (parts.length > 2) {
+      priceNetto.value = `${parts[0]}.${parts[1]}`;
+    }
   }
 };
 </script>

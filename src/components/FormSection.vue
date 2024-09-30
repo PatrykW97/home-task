@@ -36,7 +36,7 @@ const calculatedPriceBrutto = computed(() => {
 
 // validate form when submiting
 const validateForm = () => {
-  errors.description = form.description ? "" : "Text is required";
+  errors.description = form.description.trim() ? "" : "Text is required";
   errors.confirmation = form.confirmation ? "" : "Text is required";
   errors.vat = form.vat ? "" : "Text is required";
   errors.priceNetto =
@@ -70,7 +70,7 @@ const handleSubmit = async () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        description: form.description,
+        description: form.description.trim(),
         confirmation: form.confirmation,
         vat: form.vat,
         priceNetto: form.priceNetto,
@@ -113,7 +113,7 @@ const handleSubmit = async () => {
     <p>Form submited successfully!</p>
   </div>
 
-  <div v-if="errorOccurred">
+  <div v-if="errorOccurred" class="error-message">
     <p>Something went wrong. Please try again.</p>
   </div>
 </template>
