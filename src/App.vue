@@ -1,15 +1,15 @@
 <script setup>
-import FormView from './views/FormView.vue';
-
+import FormView from "./views/FormView.vue";
 </script>
 
 <template>
-  <FormView />
+  <main>
+    <FormView />
+  </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+main {
+  min-height: 100vh;
 }
 </style>
